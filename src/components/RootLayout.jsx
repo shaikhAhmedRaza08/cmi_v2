@@ -1,33 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from './NavBar'
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { store } from '../redux/store'
+import Filters from './Filters'
+import { fetchProducts } from '../redux/productSlice'
 
 function RootLayout() {
+    const dispatch = useDispatch();
+    const { data } = useSelector(state => state.products);
+
+    useEffect(() => {
+        if (data?.length === 0) {
+            dispatch(fetchProducts());
+        }
+    }, [data, dispatch]);
     return (
         <>
-            <Provider store={store}>
-                <NavBar />
-                <main>
-                    <div className='row'>
-                        <div className='col-2'>
-                            <aside>
-                                <h4>Filter</h4>
-                                <div className="d-flex flex-column">
-                                    <div>Materials</div>
-                                    <div>Color</div>
-                                </div>
-                            </aside>
-                        </div>
-                        <div className='col-10'>
-                            <Outlet />
-                        </div>
+            <NavBar />
+            <main>
+                <div className='row'>
+                    <div className='col-2'>
+                        <Filters />
                     </div>
-                </main>
-                <Footer />
-            </Provider>
+                    <div className='col-10'>
+                        <Outlet />
+                    </div>
+                </div>
+            </main>
+            {/* <Footer /> */}
         </>
     )
 }

@@ -9,8 +9,8 @@ function ProductCard(props) {
                 <h5 className="card-title">{props?.product.name}</h5>
                 <p className="card-text">INR {props.product.price}</p>
             </div>
-            <div className="card-footer">
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+            <div className="card-footer d-flex justify-content-center">
+                <button className={`btn btn-${props.variant}`} onClick={() => props.handleClick(props.product)}>{props.buttonTitle}</button>
             </div>
         </div>
     )
