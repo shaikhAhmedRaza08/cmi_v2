@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
+import FeaturedProducts from "./components/FeaturedProducts";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,6 +14,7 @@ function App() {
       element: <RootLayout />,
       children: [
         { path: "", index: true, element: <Products /> },
+        { path: "/featuredProducts", element: <FeaturedProducts /> },
         { path: "/cart", element: <Cart /> },
       ],
     },

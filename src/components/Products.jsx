@@ -3,31 +3,25 @@ import PorductCard from './ProductCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../redux/productSlice';
 import ProductCard from './ProductCard';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
+import { cartActions } from '../redux/cartSlice';
 
 function Products() {
     const dispatch = useDispatch();
-    const { data } = useSelector(state => state.products);
+    const { data: products } = useSelector(state => state.products);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(6);
     let pages = [];
 
-    useEffect(() => {
-        if (data?.length === 0) {
-            dispatch(fetchProducts());
-        }
-    }, [data, dispatch]);
-
-    console.log("Products: ", data?.products);
-
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
-    const currentPosts = data?.products?.slice(firstPostIndex, lastPostIndex);
+    const currentPosts = products?.slice(firstPostIndex, lastPostIndex);
 
-    for (let i = 1; i <= Math.ceil(data?.products?.length / postsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(products?.length / postsPerPage); i++) {
         pages.push(i);
     }
-    console.log("pages: ", pages)
+
+    const addToCart = (product) => dispatch(cartActions.add(product));
 
     return (
         <>
@@ -39,7 +33,7 @@ function Products() {
                                 key={product.id}
                                 product={product}
                                 buttonTitle="Add to cart"
-                                handleClick={() => console.log("first")}
+                                handleClick={addToCart}
                                 variant="primary"
                             />
                         </div>
