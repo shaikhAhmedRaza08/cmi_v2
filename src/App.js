@@ -8,17 +8,22 @@ import Cart from "./components/Cart";
 import FeaturedProducts from "./components/FeaturedProducts";
 
 function App() {
-  const router = createBrowserRouter([
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <RootLayout />,
+        children: [
+          { path: "", index: true, element: <Products /> },
+          { path: "/featuredProducts", element: <FeaturedProducts /> },
+          { path: "/cart", element: <Cart /> },
+        ],
+      },
+    ],
     {
-      path: "/",
-      element: <RootLayout />,
-      children: [
-        { path: "", index: true, element: <Products /> },
-        { path: "/featuredProducts", element: <FeaturedProducts /> },
-        { path: "/cart", element: <Cart /> },
-      ],
-    },
-  ]);
+      basename: "/cmi_v2",
+    }
+  );
 
   return <RouterProvider router={router} />;
 }
