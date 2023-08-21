@@ -20,7 +20,6 @@ const productSlice = createSlice({
 
 export const fetchProducts = () => async (dispatch) => {
   const response = await api.get(apiEndPoints.products);
-  
   dispatch(productActions.setProduct(response.data?.products));
 };
 

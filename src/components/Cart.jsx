@@ -6,11 +6,17 @@ import ProductCard from './ProductCard';
 function Cart() {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
-    console.log("cart", cart)
     const removeCart = (product) => dispatch(cartActions.remove(product.id));
 
     return (
         <>
+            {
+                cart.length === 0 &&
+                <div className="container text-center">
+                    <h1>Your Cart is Empty</h1>
+                    <h3 className='text-secondary'>Add items to your cart to continue shopping.</h3>
+                </div>
+            }
             <div className="row">
                 {
                     cart?.map(product => (

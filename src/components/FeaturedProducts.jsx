@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFeaturedProducts } from '../redux/featuredProductSlice';
 import ProductCard from './ProductCard';
 import { cartActions } from '../redux/cartSlice';
+import CardPlaceHolder from './CardPlaceHolder';
 
 function FeaturedProducts() {
     const dispatch = useDispatch();
@@ -25,9 +26,11 @@ function FeaturedProducts() {
     });
 
     const addToCart = (product) => dispatch(cartActions.add(product));
-    console.log("featuredProducts: ", featuredProducts)
     return (
         <div className="row">
+            {
+                featured.length === 0 && <CardPlaceHolder />
+            }
             {
                 featured?.map(product => (
                     <div className="col-4">
