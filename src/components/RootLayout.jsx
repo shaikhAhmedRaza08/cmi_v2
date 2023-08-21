@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
 import NavBar from './NavBar'
 import { Outlet } from 'react-router-dom'
-// import Footer from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
-// import { store } from '../redux/store'
-import Filters from './Filters'
 import { fetchProducts } from '../redux/productSlice'
 
 function RootLayout() {
@@ -20,16 +17,8 @@ function RootLayout() {
         <>
             <NavBar />
             <main>
-                <div className='row'>
-                    <div className='col-2'>
-                        <Filters />
-                    </div>
-                    <div className='col-10'>
-                        <Outlet />
-                    </div>
-                </div>
+                <Outlet />
             </main>
-            {/* <Footer /> */}
         </>
     )
 }
