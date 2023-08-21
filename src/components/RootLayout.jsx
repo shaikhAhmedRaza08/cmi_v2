@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import NavBar from './NavBar'
 import { Outlet } from 'react-router-dom'
-import Footer from './Footer'
-import { Provider, useDispatch, useSelector } from 'react-redux'
-import { store } from '../redux/store'
+// import Footer from './Footer'
+import { useDispatch, useSelector } from 'react-redux'
+// import { store } from '../redux/store'
 import Filters from './Filters'
 import { fetchProducts } from '../redux/productSlice'
 
